@@ -1,5 +1,6 @@
 const USERS_KEY = "users";
 
+
 const initUsers = () => {
     if(localStorage.getItem(USERS_KEY) !== null){
         return;

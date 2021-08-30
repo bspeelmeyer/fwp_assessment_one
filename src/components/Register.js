@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useValidateForm } from '../Hooks/useValidateForm';
 import { getUsers, insertOrUpdateUser, initUsers } from '../Data/UserSubmit';
 
+// This component returns and handles the registration
+// of a new user
+
 var USER_ID = 1;
 
 const Register = (props) => {

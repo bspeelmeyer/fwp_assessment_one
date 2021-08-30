@@ -20,7 +20,7 @@ export const useValidateForm = ({name = "", firstPassword = "", secondPassword =
         setMatch(firstPassword && firstPassword === secondPassword);
         setSpecialChar(/[ `!@#$%^&*()_+\-=\]{};':"\\|,.<>?~]/.test(firstPassword));
         setValidEmail(/\S+@\S+\.\S+/.test(email));
-        setHasName(/^[a-z ,.'-]+$/.test(name));
+        setHasName(/^[a-zA-Z ,.'-]+$/.test(name));
         
 
     }, [firstPassword, secondPassword, requiredLength, email, name]);

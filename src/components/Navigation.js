@@ -1,6 +1,9 @@
 import React from "react";
+import { Component } from "react";
 import { Link } from "react-router-dom";
-// The navigation fu
+
+// This Component returns the naviagtion Element
+// of the application
 
 const Navigation = () => {
   return (

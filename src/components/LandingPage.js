@@ -1,5 +1,8 @@
 import React from 'react';
 
+// This component returns the landing page 
+// content that the user will see when
+// they first come to the applciation
 
 const LandingPage = () => {
 
