@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { useValidateForm } from '../Hooks/useValidateForm';
-import { getUsers, insertOrUpdateUser, initUsers } from '../Data/UserSubmit';
+import { checkEmail, setUsers, getUsers, insertOrUpdateUser, initArray } from '../Data/UserSubmit';
 
 // This component returns and handles the registration
 // of a new user
 
-var USER_ID = 1;
 
 const Register = (props) => {
 
-    initUsers();
+    // Initiate user storage in 
+    // local storage
+    initArray();
 
-    const [fields, setFields] = useState({id: 0, name: "", email: "", password: "", confirmPassword: ""});
+    // Configure fields for state tracking
+    const [fields, setFields] = useState({name: "", email: "", password: "", confirmPassword: ""});
 
-    const [users, setUsers] = useState(getUsers());
-
+    // Use customer hook to validate the form
     const [validLength, hasNumber, upperCase, lowerCase, match, specialChar, validEmail, hasName
     ] = useValidateForm({
         firstPassword: fields.password,
@@ -23,26 +24,40 @@ const Register = (props) => {
         name: fields.name
     });
 
+    // Basic change handler
     const handleInputChange = (event) => {
         setFields({...fields, [event.target.name]: event.target.value});
        
     }
 
+    // Handler for form submit event
     const handleSubmit = (event) => {
+        
+        // Prvent redirect on form submit
         event.preventDefault();
         
+        // Check if all validation methods return true
         if(validLength && hasNumber && upperCase && lowerCase && match && specialChar && validEmail && hasName){
-            fields.id = USER_ID;
-            const user = {...fields};
-            USER_ID = USER_ID + 1;
             
+            // Check if email already exists
+            if(checkEmail(fields.email) === true){
+                alert("Email is already taken");
+                
+            }else{
 
-            insertOrUpdateUser(user);
-
-            setUsers(getUsers());
-
-
+                 // Copy field values to user object
+                const user = {...fields};
+                
+                // Call function to add user object
+                // to local storage
+                insertOrUpdateUser(user);
+                props.history.push("./home");
+            }
+            
         }else{
+
+            // If validation returns atleast 
+            // one false value alert user
             alert("please check form");
         }
         
