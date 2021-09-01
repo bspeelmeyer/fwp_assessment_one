@@ -13,7 +13,7 @@ const Register = (props) => {
     initArray();
 
     // Configure fields for state tracking
-    const [fields, setFields] = useState({name: "", email: "", password: "", confirmPassword: ""});
+    const [fields, setFields] = useState({name: "", email: "", password: "", confirmPassword: "", dateJoined = ""});
 
     // Use customer hook to validate the form
     const [validLength, hasNumber, upperCase, lowerCase, match, specialChar, validEmail, hasName
@@ -44,8 +44,10 @@ const Register = (props) => {
                 alert("Email is already taken");
                 
             }else{
+                // Date adn set joined date field
+                
 
-                 // Copy field values to user object
+                // Copy field values to user object
                 const user = {...fields};
                 
                 // Call function to add user object
