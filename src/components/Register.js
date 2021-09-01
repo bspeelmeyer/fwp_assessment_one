@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useValidateForm } from '../Hooks/useValidateForm';
 import { checkEmail, setUsers, getUsers, insertOrUpdateUser, initArray } from '../Data/UserSubmit';
-
 // This component returns and handles the registration
 // of a new user
 
@@ -13,7 +12,7 @@ const Register = (props) => {
     initArray();
 
     // Configure fields for state tracking
-    const [fields, setFields] = useState({name: "", email: "", password: "", confirmPassword: "", dateJoined = ""});
+    const [fields, setFields] = useState({name: "", email: "", password: "", confirmPassword: "", dateJoined: ""});
 
     // Use customer hook to validate the form
     const [validLength, hasNumber, upperCase, lowerCase, match, specialChar, validEmail, hasName
@@ -45,7 +44,13 @@ const Register = (props) => {
                 
             }else{
                 // Date adn set joined date field
-                
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var yyyy = today.getFullYear();
+                today = dd + '/' + mm + '/' + yyyy;
+
+                fields.dateJoined = today;
 
                 // Copy field values to user object
                 const user = {...fields};
@@ -53,7 +58,7 @@ const Register = (props) => {
                 // Call function to add user object
                 // to local storage
                 insertOrUpdateUser(user);
-                props.history.push("./home");
+                props.history.push("/signin");
             }
             
         }else{
