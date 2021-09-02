@@ -1,3 +1,5 @@
+import { propTypes } from "react-bootstrap/esm/Image";
+
 const USERS_KEY = "users";
 const LOGGED_IN = "loggedInUser";
 
@@ -99,6 +101,7 @@ const deleteUser = (email) => {
 
 const logout = () => {
     localStorage.removeItem(LOGGED_IN);
+    props.history.push("/signin");
 }
 
 export {

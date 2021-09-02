@@ -14,7 +14,7 @@ const Register = (props) => {
     // Configure fields for state tracking
     const [fields, setFields] = useState({name: "", email: "", password: "", confirmPassword: "", dateJoined: ""});
 
-    // Use customer hook to validate the form
+    // Use custom hook to validate the form
     const [validLength, hasNumber, upperCase, lowerCase, match, specialChar, validEmail, hasName
     ] = useValidateForm({
         firstPassword: fields.password,
@@ -43,7 +43,7 @@ const Register = (props) => {
                 alert("Email is already taken");
                 
             }else{
-                // Date adn set joined date field
+                // Date and set joined date field
                 var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0');
