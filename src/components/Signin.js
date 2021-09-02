@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {validateUser} from '../Data/UserSubmit';
+import {validateUser} from '../Data/UserController';
 
 // This component returns and handles the
 // sign of already registered users

@@ -39,16 +39,27 @@ const checkEmail = (email) => {
 
 // Sets localstorage logged in user as user email
 const setLoggedIn = (user) => {
-    localStorage.setItem(LOGGED_IN, user);
+    localStorage.setItem(LOGGED_IN, JSON.stringify(user));
 }
 
-
-const insertOrUpdateUser = (user) => {
+// Insert new user to array in local storage
+const insertUser = (user) => {
     const users = getUsers();
 
     users.push(user);
 
     setUsers(users);
+}
+
+// Edit existing user in localstoarge
+const editUser = (user) => {
+    const users = getUsers();
+    for(let i = 0; i < users.length;i++){
+        if(users[i].email === user.email){
+            users[i] = user;
+            setUsers(users);
+        }
+    }
 }
 
 // If email and password match, return true and set logged in user
@@ -64,11 +75,41 @@ const validateUser = (email, password) => {
     return false;
 }
 
+const getLoggedInUser = () => {
+    const users = getUsers();
+    const email = JSON.parse(localStorage.getItem(LOGGED_IN));
+    for(const user of users){
+        if(email === user.email){
+            return user;
+        }else{
+            return null;
+        }
+    }
+}
+
+const deleteUser = (email) => {
+    const users = getUsers();
+    for(let i = 0; i < users.length; i++){
+        if(email === users[i].email){
+            users.splice(i,1);
+            setUsers(users);
+        }
+    }
+}
+
+const logout = () => {
+    localStorage.removeItem(LOGGED_IN);
+}
+
 export {
     initArray,
     getUsers,
-    insertOrUpdateUser,
+    insertUser,
     validateUser,
     setUsers,
-    checkEmail
+    checkEmail,
+    getLoggedInUser,
+    deleteUser,
+    logout,
+    editUser
 }

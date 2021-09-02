@@ -7,10 +7,11 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Navigation from './Navigation';
 import Header from './Header';
 import Footer from './Footer';
-// import Home from './Home';
+import Home from './Home';
 import Register from './Register';
 import LandingPage from './LandingPage';
 import Signin from './Signin';
+import EditProfile from './EditProfile';
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             {/* Switch for react router */}
             <Switch>
 
-              {/* Route for home page of application */}
+              {/* Route for landing page of application */}
              <Route exact path="/" component={ LandingPage }/>
 
               {/* Route for the register page */}
@@ -42,6 +43,12 @@ function App() {
 
              {/* Route for the signin page */}
              <Route path="/signin" component={ Signin }/>
+
+             {/* Route for user home page */}
+             <Route path="/home" component={ Home }/>
+
+             {/* Route for the edit profile page */}
+             <Route path="/editprofile" component={ EditProfile }/>
 
             </Switch>
 
