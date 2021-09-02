@@ -43,12 +43,22 @@ const setLoggedIn = (user) => {
 }
 
 
-const insertOrUpdateUser = (user) => {
+const insertUser = (user) => {
     const users = getUsers();
 
     users.push(user);
 
     setUsers(users);
+}
+
+const editUser = (user) => {
+    const users = getUsers();
+    for(let i = 0; i < users.length;i++){
+        if(users[i].email === user.email){
+            users[i] = user;
+            setUsers(users);
+        }
+    }
 }
 
 // If email and password match, return true and set logged in user
@@ -93,11 +103,12 @@ const logout = () => {
 export {
     initArray,
     getUsers,
-    insertOrUpdateUser,
+    insertUser,
     validateUser,
     setUsers,
     checkEmail,
     getLoggedInUser,
     deleteUser,
-    logout
+    logout,
+    editUser
 }

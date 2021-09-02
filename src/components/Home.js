@@ -1,4 +1,5 @@
 import { props } from 'bluebird';
+import { Link } from "react-router-dom";
 import React from 'react';
 import { deleteUser, getLoggedInUser, logout } from '../Data/UserSubmit';
 import defaultProfileImg from '../images/default_profile.png';
@@ -37,10 +38,12 @@ const Home = (props) => {
                     <h4 className="text-white">{user.email}</h4>
                 </div>
                 <div className="col">
-                    <img src={edit} alt="Profile pic"/>    
+                    <Link to='/editprofile'>
+                        <img src={edit} alt="Edit"/>    
+                    </Link>
                 </div>
                 <div className="col">
-                    <img src={delete1} alt="Profile pic" onClick={() => confirmDelete()}/>    
+                    <img src={delete1} alt="Delete" onClick={() => confirmDelete()}/>    
                 </div>
             </div>
             <div className="row">

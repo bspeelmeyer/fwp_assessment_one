@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useValidateForm } from '../Hooks/useValidateForm';
-import { checkEmail, setUsers, getUsers, insertOrUpdateUser, initArray } from '../Data/UserSubmit';
+import { checkEmail, setUsers, getUsers, insertUser, initArray } from '../Data/UserSubmit';
 // This component returns and handles the registration
 // of a new user
 
@@ -57,7 +57,7 @@ const Register = (props) => {
                 
                 // Call function to add user object
                 // to local storage
-                insertOrUpdateUser(user);
+                insertUser(user);
                 props.history.push("/signin");
             }
             

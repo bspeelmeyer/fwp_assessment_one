@@ -11,6 +11,7 @@ import Home from './Home';
 import Register from './Register';
 import LandingPage from './LandingPage';
 import Signin from './Signin';
+import EditProfile from './EditProfile';
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
 
              {/* Route for user home page */}
              <Route path="/home" component={ Home }/>
+
+             {/* Route for the edit profile page */}
+             <Route path="/editprofile" component={ EditProfile }/>
 
             </Switch>
 
