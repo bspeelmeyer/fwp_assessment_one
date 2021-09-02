@@ -42,7 +42,7 @@ const setLoggedIn = (user) => {
     localStorage.setItem(LOGGED_IN, JSON.stringify(user));
 }
 
-
+// Insert new user to array in local storage
 const insertUser = (user) => {
     const users = getUsers();
 
@@ -51,6 +51,7 @@ const insertUser = (user) => {
     setUsers(users);
 }
 
+// Edit existing user in localstoarge
 const editUser = (user) => {
     const users = getUsers();
     for(let i = 0; i < users.length;i++){

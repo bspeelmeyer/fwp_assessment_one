@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { setConstantValue } from 'typescript';
 import { useValidateForm } from '../Hooks/useValidateForm';
-import { checkEmail, editUser, getLoggedInUser } from '../Data/UserSubmit';
+import {  editUser, getLoggedInUser } from '../Data/UserController';
 
 const EditProfile = (props) => {
     const user = getLoggedInUser();
@@ -43,6 +42,7 @@ const EditProfile = (props) => {
             // Call function to add user object
             // to local storage
             editUser(user);
+            alert("Successfully update profile");
             props.history.push("/home");
             
         }else{

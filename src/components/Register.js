@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useValidateForm } from '../Hooks/useValidateForm';
-import { checkEmail, setUsers, getUsers, insertUser, initArray } from '../Data/UserSubmit';
+import { checkEmail, insertUser, initArray } from '../Data/UserController';
 // This component returns and handles the registration
 // of a new user
 

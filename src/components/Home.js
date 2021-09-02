@@ -1,7 +1,7 @@
 import { props } from 'bluebird';
 import { Link } from "react-router-dom";
 import React from 'react';
-import { deleteUser, getLoggedInUser, logout } from '../Data/UserSubmit';
+import { deleteUser, getLoggedInUser, logout } from '../Data/UserController';
 import defaultProfileImg from '../images/default_profile.png';
 import delete1 from '../images/delete1.png';
 import edit from '../images/edit.png';
