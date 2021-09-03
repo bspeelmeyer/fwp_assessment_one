@@ -1,3 +1,5 @@
+import { getLoggedInUser } from "./UserController";
+
 const POSTS = "posts";
 //If posts key does not exist
 // in local storage then create it
@@ -25,6 +27,8 @@ const insertPost = (post) => {
     const posts = getPosts();
     post.id = getPostId(posts);
     post.postedBy = JSON.parse(localStorage.getItem("loggedInUser"));
+    const user = getLoggedInUser(post.postedBy);
+    post.name = user.name;
     posts.push(post);
     setPosts(posts);
 }
@@ -48,12 +52,21 @@ const editPost = (post) => {
 }
 
 // Delete post
-const deletePost = (post) => {
+const deletePost = (id) => {
     const posts = getPosts();
     for(let i = 0; i < posts.length;i++){
-        if(posts[i].id === post.id){
+        if(posts[i].id === id){
             posts.splice(i,1);
             setPosts(posts);
+        }
+    }
+}
+
+const getPostById = (id) => {
+    const posts = getPosts();
+    for(let i = 0; i < posts.length;i++){
+        if(posts[i].id === id){
+            return posts[i];
         }
     }
 }
@@ -62,5 +75,7 @@ export {
     initPostArray,
     insertPost,
     editPost,
-    deletePost
+    deletePost,
+    getPosts,
+    getPostById
 }
