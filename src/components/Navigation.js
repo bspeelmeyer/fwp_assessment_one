@@ -21,6 +21,12 @@ const Navigation = () => {
             <li class="nav-item">
               <Link className="nav-link" to="/register">Register</Link>
             </li>
+            <li class="nav-item">
+              <Link className="nav-link" to="/posts">Posts</Link>
+            </li>
+            <li class="nav-item">
+              <Link className="nav-link" to="/home">Profile</Link>
+            </li>
           </ul>
         </div>
       </div>

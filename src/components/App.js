@@ -12,6 +12,8 @@ import Register from './Register';
 import LandingPage from './LandingPage';
 import Signin from './Signin';
 import EditProfile from './EditProfile';
+import Posts from './Posts';
+import EditPosts from './EditPosts';
 
 function App() {
   return (
@@ -49,6 +51,14 @@ function App() {
 
              {/* Route for the edit profile page */}
              <Route path="/editprofile" component={ EditProfile }/>
+
+             {/* Route for posts page */}
+             <Route path="/posts" component={ Posts }/>
+
+             {/* Route for edit post page */}
+             <Route path="/:handle" component={ EditPosts }/>
+
+             
 
             </Switch>
 
