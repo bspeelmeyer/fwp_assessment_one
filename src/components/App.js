@@ -1,7 +1,7 @@
 import '../App.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Navigation from './Navigation';
@@ -14,8 +14,21 @@ import Signin from './Signin';
 import EditProfile from './EditProfile';
 import Posts from './Posts';
 import EditPosts from './EditPosts';
+import { checkEmail, getLoggedInEmail, removeLoggedInUser } from '../Data/UserController';
 
 function App() {
+ 
+  const [email, setEmail] = useState(getLoggedInEmail());
+
+  const loginUser = (email) => {
+    setEmail(email);
+  }
+
+  const logout = () => {
+    removeLoggedInUser();
+    setEmail(null);
+  }
+
   return (
 
     // Top level content container
@@ -28,7 +41,7 @@ function App() {
         <Header />
 
         {/* Get navbar component */}
-        <Navigation />
+        <Navigation email={email} logout={logout} />
 
         <main role="main">
           {/* Main content container */}
@@ -44,10 +57,12 @@ function App() {
              <Route path="/register" component={ Register }/>
 
              {/* Route for the signin page */}
-             <Route path="/signin" component={ Signin }/>
+             <Route path="/signin" render={props => (<Signin {...props} loginUser={loginUser}/>)}/>
 
              {/* Route for user home page */}
-             <Route path="/home" component={ Home }/>
+             <Route path="/home">
+               <Home logout={logout}/>
+             </Route>
 
              {/* Route for the edit profile page */}
              <Route path="/editprofile" component={ EditProfile }/>
