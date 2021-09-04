@@ -51,7 +51,7 @@ const Posts = (props) => {
         }
     }
 
-    // Use custom hook to validate the form
+    // Use custom hook to validate the post field
     const hasPost = usePostValidation({
         post: fields.post
     })

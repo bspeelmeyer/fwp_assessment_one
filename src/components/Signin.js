@@ -19,7 +19,9 @@ const Signin = (props) => {
         const verified = validateUser(fields.email, fields.password);
 
         if(verified === true){
+            props.loginUser(fields.email);
             props.history.push("/home");
+            alert("Welcome " + props.us)
             return;
         }
 
