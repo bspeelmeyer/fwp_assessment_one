@@ -4,8 +4,8 @@ import React from 'react';
 // throughout the application
 const Footer = () => {
     return (
-        <footer className="mt-auto py-3 text-white bg-dark">
-            <div class="container">&copy; 2021</div>
+        <footer className="mt-auto py-3 text-white bg-dark border-top">
+            <div class="container">Student no: S3729184 &copy; 2021</div>
         </footer>
     );
 } 

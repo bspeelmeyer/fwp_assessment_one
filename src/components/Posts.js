@@ -11,6 +11,7 @@ const Posts = (props) => {
     // Initialize post array
     initPostArray();
 
+    // Allows the posts to be updated from localstorage
     var updatePosts = getPosts();
 
     // Configure fields for state tracking
@@ -71,27 +72,55 @@ const Posts = (props) => {
 
     return (
         <div className="container bg-dark">
+            <div className="row border-bottom">
+                <h2 className="text-white text-center">Posts</h2>
+            </div>
             <div className="row">
-            <form onSubmit={handleSubmit}>
-                <div class="form-group">
-                    <label class="text-white" htmlFor="post">What on your mind?</label>
-                    <input type="text" class="form-control" name="post" id="post" placeholder="Share your thoughts..."
-                        value={fields.post} onChange={handleInputChange}></input>
+                <div className="col"></div>
+                <div className="col-6 py-2">
+                    <form onSubmit={handleSubmit}>
+                        <div class="form-group">
+                            <label class="text-white" htmlFor="post">What on your mind?</label>
+                            <input type="text" class="form-control" name="post" id="post" placeholder="Share your thoughts..."
+                                value={fields.post} onChange={handleInputChange}></input>
+                        </div>
+                        <div class="form-group py-2 border-bottom">
+                            {/* disable button, unless text is present in input */}
+                            {hasPost ? <button type="submit" class="btn btn-dark">Submit</button> : <button type="submit" class="btn btn-dark disabled">Submit</button>}
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    {hasPost ? <button type="submit" class="btn btn-primary">Submit</button> : <button type="submit" class="btn btn-primary disabled">Submit</button>}
-                </div>
-            </form>
+                <div className="col"></div>
             </div>
             {updatePosts.map(function(u, idx){
                 return(
-                    <div className="row">
-                        <div className="container">
-                            <h4 className="text-white" key={idx}>{u.name}</h4>
-                            <p className="text-white" key={idx}>{u.post}</p>
-                            {ownPost(u.postedBy) ?    <Link to={{pathname: '/editposts', state: {userId: u.id},}}><img src={edit} alt="Edit"/></Link>: null}
-                            {ownPost(u.postedBy) ?  <img src={delete1} alt="Delete" onClick={() => confirmDelete(u.id)}/>  : null}
+                    
+                    <div className="row py-2">
+                        <div className="row py-2 border border-bottom-0">
+                            <h4 className="text-white border-bottom pb-2" key={idx}>{u.name}</h4>
                         </div>
+
+                        {/* Renders boarder differently dependant on ownership of post */}
+                        {ownPost(u.postedBy) ? <div className="row border border-top-0 border-bottom-0"> ?
+                                                    <p className="text-white text-break" key={idx}>{u.post}</p>
+                                                </div> 
+                                                :
+                                                <div className="row border border-top-0"> 
+                                                    <p className="text-white text-break" key={idx}>{u.post}</p>
+                                                </div> }
+
+                        {/* Renders edit and delete buttons, dependant on ownership of posts */}
+                        {ownPost(u.postedBy) ? 
+                        <div className="row border border-top-0">
+                            <div className="col-10 border-top"></div>
+                            <div className="col-1 border-top py-2">
+                                <Link to={{pathname: '/editposts', state: {userId: u.id},}}><img className="float-right"src={edit} alt="Edit"/></Link>
+                            </div>
+                            <div className="col-1 border-top py-2">
+                                <img  src={delete1} alt="Delete" onClick={() => confirmDelete(u.id)}/>  
+                            </div>
+                        </div>
+                        : null}
                     </div>
                 )
             })}

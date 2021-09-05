@@ -1,5 +1,10 @@
+// Controller handles all crud operations
+// of users
 
+// local storage users array key
 const USERS_KEY = "users";
+
+// local storage logged in user key
 const LOGGED_IN = "loggedInUser";
 
 // If user key does not exist 
@@ -53,59 +58,80 @@ const insertUser = (user) => {
 }
 
 // Edit existing user in localstoarge
-const editUser = (user) => {
+const editUser = (updateUser, oldEmail) => {
     const users = getUsers();
-    for(let i = 0; i < users.length;i++){
-        if(users[i].email === user.email){
-            users[i] = user;
+    for(var i in users){
+        if(users[i].email === oldEmail.oldEmail){
+            setLoggedIn(updateUser.email);
+            users[i] = updateUser;
             setUsers(users);
         }
     }
+    
 }
 
 // If email and password match, return true and set logged in user
 // and redirect to home page. If no match found return false
 const validateUser = (email, password) => {
     const users = getUsers();
-    for( const user of users){
+    for(const user of users){
         if(email === user.email && password === user.password){
-            setLoggedIn(user.email);
+            setLoggedIn(email);
             return true;
         }
     }
     return false;
 }
 
+// Function returns logged in user details
 const getLoggedInUser = () => {
     const users = getUsers();
     const email = JSON.parse(localStorage.getItem(LOGGED_IN));
     for(const user of users){
         if(email === user.email){
             return user;
-        }else{
-            return null;
-        }
-    }
+        };
+    };
+    return null;
 }
 
 
-
+// Function deletes user by their email
 const deleteUser = (email) => {
     const users = getUsers();
-    for(let i = 0; i < users.length; i++){
-        if(email === users[i].email){
-            users.splice(i,1);
+    for(const user of users){
+        if(email === user.email){
+            users.splice(user,1);
             setUsers(users);
         }
     }
 }
 
+// Removes the user email from 
+// the logged in user field in
+// local storage
 const removeLoggedInUser = () => {
     localStorage.removeItem(LOGGED_IN);
 }
 
+// Function returns the email of the logged
+// in user
 const getLoggedInEmail = () => {
-  return  localStorage.getItem(LOGGED_IN);
+  return  JSON.parse(localStorage.getItem(LOGGED_IN));
+}
+
+// Function gets the name of 
+// user via their email
+const getName = (email) => {
+    const users = getUsers();
+    for(const user of users){
+        if(email === user.email){
+            return user.name;
+        }
+        
+        
+    }
+    return null;
 }
 
 
@@ -121,6 +147,7 @@ export {
     deleteUser,
     removeLoggedInUser,
     editUser,
+    getName
     
     
 }

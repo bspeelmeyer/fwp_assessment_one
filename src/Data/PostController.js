@@ -1,6 +1,10 @@
 import { getLoggedInUser } from "./UserController";
+// Controller handles crud operations for posts
 
+// local Storage key
 const POSTS = "posts";
+
+
 //If posts key does not exist
 // in local storage then create it
 const initPostArray = () => {
@@ -51,7 +55,30 @@ const editPost = (post) => {
     }
 }
 
-// Delete post
+// Function updates all post user has made to their
+// new email address under the post owner field
+const updatePostOwner = (newEmail,OldEmail) => {
+    const posts = getPosts();
+    for(let i = 0; i < posts.length;i++){
+        if(posts[i].postedBy === OldEmail){
+            posts[i].postedBy = newEmail;
+        }
+    }
+    setPosts(posts);
+}
+
+// Function deletes all posts user owns
+// when user deletes their account
+const deletePostsByOwner = (email) => {
+    const posts = getPosts();
+    for(let i = 0; i < posts.length;i++){
+        if(posts[i].postedBy === email){
+            deletePost(posts[i].id);
+        }
+    }
+}
+
+// Delete post by id
 const deletePost = (id) => {
     const posts = getPosts();
     for(let i = 0; i < posts.length;i++){
@@ -62,6 +89,7 @@ const deletePost = (id) => {
     }
 }
 
+// Return post of given id
 const getPostById = (id) => {
     const posts = getPosts();
     for(let i = 0; i < posts.length;i++){
@@ -77,5 +105,7 @@ export {
     editPost,
     deletePost,
     getPosts,
-    getPostById
+    getPostById,
+    updatePostOwner,
+    deletePostsByOwner
 }

@@ -1,3 +1,5 @@
+// Customer hook validates the post field
+
 import { useState, useEffect } from "react";
 
 export const usePostValidation = ({post = ""}) => {

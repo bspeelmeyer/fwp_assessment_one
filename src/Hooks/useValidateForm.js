@@ -1,5 +1,7 @@
 //password validation Source: 
 // https://medium.com/@steven_creates/creating-a-custom-react-hook-for-password-validation-46fc421c16ee
+
+// Customer hook validates the register form
 import { useState, useEffect } from "react";
 export const useValidateForm = ({name = "", firstPassword = "", secondPassword = "", requiredLength = 8, email = ""}) => {
     

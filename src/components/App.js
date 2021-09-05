@@ -14,16 +14,20 @@ import Signin from './Signin';
 import EditProfile from './EditProfile';
 import Posts from './Posts';
 import EditPosts from './EditPosts';
-import { checkEmail, getLoggedInEmail, removeLoggedInUser } from '../Data/UserController';
+import { getLoggedInEmail, removeLoggedInUser } from '../Data/UserController';
 
 function App() {
- 
+  
+  // create useState hook for logged in user email
   const [email, setEmail] = useState(getLoggedInEmail());
 
+  // function to set logged in user email state
   const loginUser = (email) => {
     setEmail(email);
   }
 
+  // function removes logged in user email from props
+  // and localstorage
   const logout = () => {
     removeLoggedInUser();
     setEmail(null);
@@ -65,7 +69,7 @@ function App() {
              </Route>
 
              {/* Route for the edit profile page */}
-             <Route path="/editprofile" component={ EditProfile }/>
+             <Route path="/editprofile" render={props =>(<EditProfile {...props} loginUser={loginUser}/>)}/>
 
              {/* Route for posts page */}
              <Route path="/posts" component={ Posts }/>
